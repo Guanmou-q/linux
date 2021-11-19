@@ -1,7 +1,7 @@
 <html>
   <head>
 	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Linux学习</title>
+    <title>i5ting_ztree_toc:1</title>
 		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
 		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
 		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
@@ -65,348 +65,216 @@
 				</div>
         <div id='readme' style='width:70%;margin-left:20%;'>
           	<article class='markdown-body'>
-            	<p>[TOP]
-任务 ：第十周学完第二章
-11.8</p>
-<h1 id="-">文件和目录操作</h1>
-<h2 id="-">重要的命令</h2>
-<h3 id="pwd">pwd</h3>
-<blockquote>
-<p>-l 逻辑路径
- -p 物理路径</p>
-</blockquote>
-<h3 id="cp-">CP命令</h3>
-<p>cp [option] [source] [dest].
-备份使用</p>
-<blockquote>
-</blockquote>
-<p>  -p 谁的，权限，时间
-  -d 符号链接，保持指向的目录
-  -r 递归目录全部子目录和文件
-  a (pdr总和)
-  -i 提示确认
-  -t 颠倒源文件和目标文件 </p>
-<ul>
-<li><p>快速备份
-bash对大括号的操作
-{，.ori(备份文件的后缀名)}</p>
-</li>
-<li><p>不提醒覆盖</p>
-</li>
-<li>使用命令全路径
- <em>which cp</em> 查看系统别名</li>
-<li>命令开头/
- /cp file.txt file1.txt<h3 id="mv-">mv命令</h3>
-mv [option] [source] [dest]</li>
-<li>改名
-mv file.txt file1.txt </li>
-</ul>
-<blockquote>
-</blockquote>
-<p>i 提醒
-f 覆盖
-n 不覆盖
-t <strong>移动多个文件到同一目录</strong></p>
-<ul>
-<li>移动
-单个文件
-  mv file.txt tmp/
-多个文件
-  mv file.txt tmp/</li>
-<li><h3 id="rm">rm</h3>
-rm （删除<strong>慎用</strong>）
--f 强制删除
--i 
--I
--r 递归删除目录及其内容 </li>
-<li>不带参数 rm file.txt</li>
-<li>-rf
-<strong>总结</strong></li>
-<li>用mv替换rm（放到tmp）</li>
-<li>备份（异机）</li>
-<li>find（不会）</li>
-<li>不要使用通配符</li>
-<li>慎用rsync --delete（ext3grep恢复）</li>
-</ul>
-<h5 id="rmdir-">rmdir 删除空目录</h5>
-<p>11.9</p>
-<h3 id="ln-">ln，软连接，硬链接</h3>
-<p>4、ln：软连接和硬链接</p>
-<ul>
-<li>对于目录来说只能创建软连接 但是可以跨越文件系统</li>
-</ul>
-<h4 id="4-1-">4.1 硬链接</h4>
-<ol>
-<li>索引节点（每个系统文件<strong>ext2,ext3</strong>）</li>
-<li>与源文件有相同的节点
-ln sour sour_hardlink </li>
-</ol>
-<p>文件</p>
-<h4 id="4-2-">4.2 软连接</h4>
-<p>类似于快捷方式
-ln -s sour sour_softlink</p>
-<blockquote>
-<p>格式：    ln [参数] [源] [目标]
-无参数    硬链接 <strong>生成普通文件</strong>
--s         软连接（符号链接）**</p>
-</blockquote>
-<h4 id="-"><strong>总结</strong></h4>
-<p>源文件删除了 软连就会失效
-真正删除文件：硬链接和源文件都要删除
-<em>源文件是核心</em></p>
-<h4 id="5-readlink">5、readlink</h4>
-<p><strong>查看软连接的真实内容</strong>
-readlink -f file 
-11.10</p>
-<h3 id="find-">find:查找目录下的文件、</h3>
-<p>find [选项]
-？：
-2、 sed命令替换
-3、 tar 普通文件压缩文件
-<em>生产案例学完再看</em></p>
-<h4 id="-"><strong>.(匹配当前目录)</strong></h4>
-<ol>
-<li>查找指定时间内修改过的文件
--atime 
--2 ，+2 ，2 的区别<blockquote>
-<p>-2是指两天内
-+2 距离现在两天
-2 是指距现在两天
-例子：find . -atime -2</p>
-</blockquote>
-</li>
-</ol>
-<h4 id="2-name-">2. -name 关键词查找</h4>
-<blockquote>
-<p>find /var/log/ -atime +5 -name &#39;*.log&#39;  </p>
-<ul>
-<li>匹配所有</li>
-</ul>
-</blockquote>
-<h4 id="3-type-">3. -type类型查找与反向！</h4>
-<p>f   普通文件
-d     目录
-l     符号链接文件</p>
-<blockquote>
-<p>find . -type d 查找的为目录文件
-find . ! -type d //查找的不是目录文件</p>
-</blockquote>
-<h4 id="4-size-10000c-10000-">4. -size 查找某个范围内的文件 +10000c(大于10000字节的文件 )</h4>
-<ol start="5">
-<li>忽略目录</li>
-</ol>
-<h4 id="5-1-">5.1 单个目录</h4>
-<blockquote>
-<p>find /data -path &quot;/data/dir3&quot; -prune -o -print</p>
-</blockquote>
-<p>-path 指定目录样式
--prune 排除
--o （or） 
-print 输出</p>
-<h4 id="5-2-">5.2 多个目录忽略</h4>
-<blockquote>
-<p>find /data -path <strong>( -path /data/dir2 -o -path /data/dir3 )</strong> -prune -o -print
-()表达式结合
-\（）转义（）在命令行有特殊含义
-find . ( -path ./dir1 -o -path ./dir2 ) -prune -o -print
-11.11</p>
-<ol start="6">
-<li>-regextype &quot;type&quot; -regex &quot;pattern&quot;
-find / -regex &quot;.*find&quot;
-默认类型 <strong>emacs</strong></li>
-</ol>
-</blockquote>
-<h4 id="7-exec-ls-l-">7. exec加入ls -l 命令</h4>
-<blockquote>
-<p>find . -type f -exec ls -l {} \;
-\; 是为了转义
-{}代表前面查找到的内容</p>
-</blockquote>
-<p><strong>-ok</strong> 相同</p>
-<h4 id="8-ls-l-xargs">8. ls -l 在xargs</h4>
-<ul>
-<li>|管道符号<blockquote>
-<p>find . -type f|xargs ls -l</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="-"><strong>技巧</strong></h4>
-<p>1、 进入目录删除文件</p>
-<blockquote>
-<p>find /root/data -type f -name &quot;*oldboy.txt&quot; | xargs rm -f 
-2、 sed命令替换
-3、 普通文件压缩文件</p>
-</blockquote>
-<p>4、删除文件下所有文件保留想要的
-touch file{1..10} 生成10个文件</p>
-<ul>
-<li>xargs<blockquote>
-<p>find /xx -type f ! -name &quot;file10&quot; | xargs rm -f </p>
-</blockquote>
-</li>
-<li>exec<blockquote>
-<p>find /xx -type f ! -name &quot;file10&quot; -exec rm  -f { } \;</p>
-</blockquote>
-</li>
-<li>rsync </li>
-</ul>
-<p>11.12</p>
-<h3 id="xargs-"><strong>xargs传递命令的过滤器</strong></h3>
-<ol>
-<li><p>-n 每行的最大参数</p>
-<blockquote>
-<p>xargs -n 3 &lt; test.txt 空格为分隔符</p>
-</blockquote>
-</li>
-<li><p>-d x 自定义分隔符</p>
-<blockquote>
-<p>echo abxabxabx|xargs -d x </p>
-</blockquote>
-</li>
-<li>-i {} 代替的字符串 -I 代替[]<blockquote>
-<p>find . -name &quot;text&quot;|xargs -i  mv {} </p>
-</blockquote>
-<h3 id="chown-"><strong>chown文件或目录的用户和用户组</strong></h3>
-*创建用户
-useradd name</li>
-<li>加密码
-useradd passwd name
-chown 用户 文件
-chown :组 文件
-chown 用户:组 文件
--R 递归更改</li>
-<li>chown root file</li>
-</ol>
-<h3 id="chmod"><strong>chmod</strong></h3>
-<p>超级命令
- chmod u+r 文件
- 1、使用字母+操作符
- chmod u+r 1.txt</p>
-<p> 2、数字权利
- r 4
- x 1
- w 2
- 7--rwx
- 5--rx
- 3--wx
- 3、读写权利的说明
- 644
- 755</p>
-<h2 id="-">熟悉</h2>
-<h4 id="rename-"><strong>rename</strong>批量修改文件名</h4>
-<p>rename from to file
-from 原来</p>
-<p>to  改后</p>
-<p>file *</p>
-<h4 id="dirname-"><strong>dirname</strong> 显示文件目录</h4>
-<blockquote>
-<p>dirname /data/dir1/1.txt</p>
-</blockquote>
-<h4 id="chattr-"><strong>chattr</strong> 改变扩展属性</h4>
-<ol>
-<li><p>+a 文件中添加数据不能删除</p>
-<blockquote>
-<p>chattr +a test
-追加文本
-echo 111 &gt;&gt;test</p>
-</blockquote>
-</li>
-<li><p>+i上锁  -i 去掉</p>
-</li>
-</ol>
-<p>11.13</p>
-<h4 id="file-"><strong>file :显示文件类型</strong></h4>
-<ul>
-<li>通配符匹配多个文件<blockquote>
-<p>fle -b file #《==精简模式</p>
-</blockquote>
-<h4 id="md5sum-"><strong>MD5sum 校验</strong></h4>
--b 二进制读取
--c 读取并校验</li>
-<li>检验文件是否改变
-生成校验文件<blockquote>
-<p>md5sum oldboy.txt &gt;md5.log 
-cat md5.log
-md5 -c md5.log
-<strong>总结</strong></p>
-</blockquote>
-</li>
-</ul>
-<h4 id="chgrp-"><strong>chgrp更改文件用户组</strong></h4>
-<p>chgrp  组 文件
-chgrp root file</p>
-<h4 id="umask-"><strong>umask创建默认权限</strong></h4>
-<p>默认值 0 3 3
-不懂
-11.15</p>
-<h1 id="-">文件过滤和内容编辑</h1>
-<h2 id="cat-"><strong>cat 合并文件或查看文件</strong></h2>
-<p>1、功能
-1.1 查看文本</p>
-<blockquote>
-<p>cat text
-1.2 合并文件 
-cat file1.txt file2.txt &gt;newfile.txt</p>
-</blockquote>
-<p>1.3 创建编辑新文件
-cat &gt;file1.txt
-ctrl +d/c结束编辑
-ctrl+推个去掉</p>
-<p>1.4 <strong>非交互式的编辑/内容追加到尾部</strong>
-非交互式编辑 不需要移动光标</p>
-<blockquote>
-<p>cat &gt;&gt;file.txt&lt;<EOF
-cat >test.txt&gt;&gt;EOF
-1.5 清空文件
-cat /dev/null &gt;flie1.txt
-2、参数
--n 从1开始对所有输入的内容an行编号 
--b 同上但会忽略空白行号
-<strong>tac反向显示内容</strong>
-tac file</p>
-</blockquote>
-<h2 id="-">分页显示</h2>
-<h3 id="1-more-">1、more:</h3>
-<p>+nu 从行号开始显示
-交互式模式下
-    空格    下一页
-    B        上一页
-    /内容     查找 </p>
-<blockquote>
-<p>more -5 file 限制显示行数
-more +100 file
-分页显示目录
-ls dir|more -10</p>
-</blockquote>
-<h3 id="2-less-more-">2、<strong>less: more的升级版</strong></h3>
-<p>-N 显示行号
-交互式：
-    空格    下一页
-    B        上一页
-    /内容     向下查找 
-    ？        向上查找
-    v        进入编辑状态
-    g(G)    移动到第一行或者最后一行
-    q        退出less 命令
-    .
-11.17 </p>
-<h2 id="-">显示开头和结尾</h2>
-<h3 id="head"><strong>head</strong></h3>
-<p>-n 显示行数
-可以显示多个</p>
-<h3 id="tail"><strong>tail</strong></h3>
-<p> -N +5 是从第五开始显示</p>
-<h4 id="tailf-"><strong>tailf</strong> 日志追踪</h4>
-<p>tailf -n file </p>
-<h2 id="cut-"><strong>cut</strong>提取文字并输出</h2>
-<p>-d 自定义分隔符 默认是TAB
--c 以字符为单位进行分割
--N 第N个字节
-N- 从第n个到最后
-N-M 从第N到第M 个字节或字符
--M 从第一行到M
-11.19</p>
+            	<p><p>@<a href="这里写自定义目录标题">TOC</a></p></p>
+<h1>欢迎使用Markdown编辑器</h1>
 
+<p>你好！ 这是你第一次使用 <strong>Markdown编辑器</strong> 所展示的欢迎页。如果你想学习如何使用Markdown编辑器, 可以仔细阅读这篇文章，了解一下Markdown的基本语法知识。</p>
+
+<h2>新的改变</h2>
+
+<p>我们对Markdown编辑器进行了一些功能拓展与语法支持，除了标准的Markdown编辑器功能，我们增加了如下几点新功能，帮助你用它写博客：
+ 1. <strong>全新的界面设计</strong> ，将会带来全新的写作体验；
+ 2. 在创作中心设置你喜爱的代码高亮样式，Markdown <strong>将代码片显示选择的高亮样式</strong> 进行展示；
+ 3. 增加了 <strong>图片拖拽</strong> 功能，你可以将本地的图片直接拖拽到编辑区域直接展示；
+ 4. 全新的 <strong>KaTeX数学公式</strong> 语法；
+ 5. 增加了支持<strong>甘特图的mermaid语法[^1]</strong> 功能；
+ 6. 增加了 <strong>多屏幕编辑</strong> Markdown文章功能；
+ 7. 增加了 <strong>焦点写作模式、预览模式、简洁写作模式、左右区域同步滚轮设置</strong> 等功能，功能按钮位于编辑区域与预览区域中间；
+ 8. 增加了 <strong>检查列表</strong> 功能。
+ [^1]: <a href="https://mermaidjs.github.io/">mermaid语法说明</a></p>
+
+<h2>功能快捷键</h2>
+
+<p>撤销：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Z&lt;/kbd&gt;
+重做：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Y&lt;/kbd&gt;
+加粗：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;B&lt;/kbd&gt;
+斜体：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;I&lt;/kbd&gt;
+标题：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;H&lt;/kbd&gt;
+无序列表：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;U&lt;/kbd&gt;
+有序列表：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;O&lt;/kbd&gt;
+检查列表：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt;
+插入代码：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;K&lt;/kbd&gt;
+插入链接：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;L&lt;/kbd&gt;
+插入图片：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;Shift&lt;/kbd&gt; + &lt;kbd&gt;G&lt;/kbd&gt;
+查找：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;F&lt;/kbd&gt;
+替换：&lt;kbd&gt;Ctrl/Command&lt;/kbd&gt; + &lt;kbd&gt;G&lt;/kbd&gt;</p>
+
+<h2>合理的创建标题，有助于目录的生成</h2>
+
+<p>直接输入1次&lt;kbd&gt;#&lt;/kbd&gt;，并按下&lt;kbd&gt;space&lt;/kbd&gt;后，将生成1级标题。
+输入2次&lt;kbd&gt;#&lt;/kbd&gt;，并按下&lt;kbd&gt;space&lt;/kbd&gt;后，将生成2级标题。
+以此类推，我们支持6级标题。有助于使用<code>TOC</code>语法后生成一个完美的目录。</p>
+
+<h2>如何改变文本的样式</h2>
+
+<p><em>强调文本</em> <em>强调文本</em></p>
+
+<p><strong>加粗文本</strong> <strong>加粗文本</strong></p>
+
+<p>==标记文本==</p>
+
+<p><del>删除文本</del></p>
+
+<blockquote><p>引用文本</p></blockquote>
+
+<p>H~2~O is是液体。</p>
+
+<p>2^10^ 运算结果是 1024.</p>
+
+<h2>插入链接与图片</h2>
+
+<p>链接: <a href="https://www.csdn.net/">link</a>.</p>
+
+<p>图片: <img alt="Alt" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw"/></p>
+
+<p>带尺寸的图片: <img alt="Alt" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw =30x30"/></p>
+
+<p>居中的图片: <img alt="Alt" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw#pic_center"/></p>
+
+<p>居中并且带尺寸的图片: <img alt="Alt" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw#pic_center =30x30"/></p>
+
+<p>当然，我们为了让用户更加便捷，我们增加了图片拖拽功能。</p>
+
+<h2>如何插入一段漂亮的代码片</h2>
+
+<p>去<a href="https://mp.csdn.net/console/configBlog">博客设置</a>页面，选择一款你喜欢的代码片高亮样式，下面展示同样高亮的 <code>代码片</code>.
+<code>javascript
+// An highlighted block
+var foo = &#39;bar&#39;;
+</code></p>
+
+<h2>生成一个适合你的列表</h2>
+
+<ul><li><p>项目</p><ul><li><p>项目</p><ul><li><p>项目</p></li></ul></li></ul></li><li><p>项目1</p></li><li>项目2</li><li><p>项目3</p></li><li><p>[ ] 计划任务</p></li><li>[x] 完成任务</li></ul>
+
+<h2>创建一个表格</h2>
+
+<p>一个简单的表格是这么创建的：
+项目     | Value
+-------- | -----
+电脑  | $1600
+手机  | $12
+导管  | $1</p>
+
+<h3>设定内容居中、居左、居右</h3>
+
+<p>使用<code>:---------:</code>居中
+使用<code>:----------</code>居左
+使用<code>----------:</code>居右
+| 第一列       | 第二列         | 第三列        |
+|:-----------:| -------------:|:-------------|
+| 第一列文本居中 | 第二列文本居右  | 第三列文本居左 |</p>
+
+<h3>SmartyPants</h3>
+
+<p>SmartyPants将ASCII标点字符转换为“智能”印刷标点HTML实体。例如：
+|    TYPE   |ASCII                          |HTML
+|----------------|-------------------------------|-----------------------------|
+|Single backticks|<code>&#39;Isn&#39;t this fun?&#39;</code>            |&#39;Isn&#39;t this fun?&#39;            |
+|Quotes          |<code>&quot;Isn&#39;t this fun?&quot;</code>            |&quot;Isn&#39;t this fun?&quot;            |
+|Dashes          |<code>-- is en-dash, --- is em-dash</code>|-- is en-dash, --- is em-dash|</p>
+
+<h2>创建一个自定义列表</h2>
+
+<p>Markdown
+:  Text-to-HTML conversion tool</p>
+
+<p>Authors
+:  John
+:  Luke</p>
+
+<h2>如何创建一个注脚</h2>
+
+<p>一个具有注脚的文本。<a href="注脚的解释">^2</a></p>
+
+<h2>注释也是必不可少的</h2>
+
+<p>Markdown将文本转换为 HTML。</p>
+
+<p>*[HTML]:   超文本标记语言</p>
+
+<h2>KaTeX数学公式</h2>
+
+<p>您可以使用渲染LaTeX数学表达式 <a href="https://khan.github.io/KaTeX/">KaTeX</a>:</p>
+
+<p>Gamma公式展示 $\Gamma(n) = (n-1)!\quad\forall
+n\in\mathbb N$ 是通过欧拉积分</p>
+
+<p>$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$</p>
+
+<blockquote><p>你可以找到更多关于的信息 <strong>LaTeX</strong> 数学表达式<a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">here</a>.</p></blockquote>
+
+<h2>新的甘特图功能，丰富你的文章</h2>
+
+<p><code>mermaid
+gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram functionality to mermaid
+        section 现有任务
+        已完成               :done,    des1, 2014-01-06,2014-01-08
+        进行中               :active,  des2, 2014-01-09, 3d
+        计划一               :         des3, after des2, 5d
+        计划二               :         des4, after des3, 5d
+</code>
+- 关于 <strong>甘特图</strong> 语法，参考 <a href="https://mermaidjs.github.io/">这儿</a>,</p>
+
+<h2>UML 图表</h2>
+
+<p>可以使用UML图表进行渲染。 <a href="https://mermaidjs.github.io/">Mermaid</a>. 例如下面产生的一个序列图：</p>
+
+<p><code></code>`mermaid
+sequenceDiagram
+张三 -&gt;&gt; 李四: 你好！李四, 最近怎么样?
+李四--&gt;&gt;王五: 你最近怎么样，王五？
+李四--x 张三: 我很好，谢谢!
+李四-x 王五: 我很好，谢谢!
+Note right of 王五: 李四想了很长时间, 文字太长了&lt;br/&gt;不适合放在一行.</p>
+
+<p>李四--&gt;&gt;张三: 打量着王五...
+张三-&gt;&gt;王五: 很好... 王五, 你怎么样?
+<code></code>`</p>
+
+<p>这将产生一个流程图。:</p>
+
+<p><code>mermaid
+graph LR
+A[长方形] -- 链接 --&gt; B((圆))
+A --&gt; C(圆角长方形)
+B --&gt; D{菱形}
+C --&gt; D
+</code></p>
+
+<ul><li>关于 <strong>Mermaid</strong> 语法，参考 <a href="https://mermaidjs.github.io/">这儿</a>,</li></ul>
+
+<h2>FLowchart流程图</h2>
+
+<p>我们依旧会支持flowchart的流程图：
+<code></code>`mermaid
+flowchat
+st=&gt;start: 开始
+e=&gt;end: 结束
+op=&gt;operation: 我的操作
+cond=&gt;condition: 确认？</p>
+
+<p>st-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;op
+<code></code>`</p>
+
+<ul><li>关于 <strong>Flowchart流程图</strong> 语法，参考 <a href="http://adrai.github.io/flowchart.js/">这儿</a>.</li></ul>
+
+<h2>导出与导入</h2>
+
+<h3>导出</h3>
+
+<p>如果你想尝试使用此编辑器, 你可以在此篇文章任意编辑。当你完成了一篇文章的写作, 在上方工具栏找到 <strong>文章导出</strong> ，生成一个.md文件或者.html文件进行本地保存。</p>
+
+<h3>导入</h3>
+
+<p>如果你想加载一篇你写过的.md文件，在上方工具栏可以选择导入功能进行对应扩展名的文件导入，
+继续你的创作。</p>
           	</article>
         </div>
 		</div>
