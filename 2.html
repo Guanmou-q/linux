@@ -1,0 +1,430 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:2</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<p>[TOP]
+任务 ：第十周学完第二章
+11.8</p>
+<h1 id="-">文件和目录操作</h1>
+<h2 id="-">重要的命令</h2>
+<h3 id="pwd">pwd</h3>
+<blockquote>
+<p>-l 逻辑路径
+ -p 物理路径</p>
+</blockquote>
+<h3 id="cp-">CP命令</h3>
+<p>cp [option] [source] [dest].
+备份使用</p>
+<blockquote>
+</blockquote>
+<p>  -p 谁的，权限，时间
+  -d 符号链接，保持指向的目录
+  -r 递归目录全部子目录和文件
+  a (pdr总和)
+  -i 提示确认
+  -t 颠倒源文件和目标文件 </p>
+<ul>
+<li><p>快速备份
+bash对大括号的操作
+{，.ori(备份文件的后缀名)}</p>
+</li>
+<li><p>不提醒覆盖</p>
+</li>
+<li>使用命令全路径
+ <em>which cp</em> 查看系统别名</li>
+<li>命令开头/
+ /cp file.txt file1.txt<h3 id="mv-">mv命令</h3>
+mv [option] [source] [dest]</li>
+<li>改名
+mv file.txt file1.txt </li>
+</ul>
+<blockquote>
+</blockquote>
+<p>i 提醒
+f 覆盖
+n 不覆盖
+t <strong>移动多个文件到同一目录</strong></p>
+<ul>
+<li>移动
+单个文件
+  mv file.txt tmp/
+多个文件
+  mv file.txt tmp/</li>
+<li><h3 id="rm">rm</h3>
+rm （删除<strong>慎用</strong>）
+-f 强制删除
+-i 
+-I
+-r 递归删除目录及其内容 </li>
+<li>不带参数 rm file.txt</li>
+<li>-rf
+<strong>总结</strong></li>
+<li>用mv替换rm（放到tmp）</li>
+<li>备份（异机）</li>
+<li>find（不会）</li>
+<li>不要使用通配符</li>
+<li>慎用rsync --delete（ext3grep恢复）</li>
+</ul>
+<h5 id="rmdir-">rmdir 删除空目录</h5>
+<p>11.9</p>
+<h3 id="ln-">ln，软连接，硬链接</h3>
+<p>4、ln：软连接和硬链接</p>
+<ul>
+<li>对于目录来说只能创建软连接 但是可以跨越文件系统</li>
+</ul>
+<h4 id="4-1-">4.1 硬链接</h4>
+<ol>
+<li>索引节点（每个系统文件<strong>ext2,ext3</strong>）</li>
+<li>与源文件有相同的节点
+ln sour sour_hardlink </li>
+</ol>
+<p>文件</p>
+<h4 id="4-2-">4.2 软连接</h4>
+<p>类似于快捷方式
+ln -s sour sour_softlink</p>
+<blockquote>
+<p>格式：    ln [参数] [源] [目标]
+无参数    硬链接 <strong>生成普通文件</strong>
+-s         软连接（符号链接）**</p>
+</blockquote>
+<h4 id="-"><strong>总结</strong></h4>
+<p>源文件删除了 软连就会失效
+真正删除文件：硬链接和源文件都要删除
+<em>源文件是核心</em></p>
+<h4 id="5-readlink">5、readlink</h4>
+<p><strong>查看软连接的真实内容</strong>
+readlink -f file 
+11.10</p>
+<h3 id="find-">find:查找目录下的文件、</h3>
+<p>find [选项]
+？：
+2、 sed命令替换
+3、 tar 普通文件压缩文件
+<em>生产案例学完再看</em></p>
+<h4 id="-"><strong>.(匹配当前目录)</strong></h4>
+<ol>
+<li>查找指定时间内修改过的文件
+-atime 
+-2 ，+2 ，2 的区别<blockquote>
+<p>-2是指两天内
++2 距离现在两天
+2 是指距现在两天
+例子：find . -atime -2</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="2-name-">2. -name 关键词查找</h4>
+<blockquote>
+<p>find /var/log/ -atime +5 -name &#39;*.log&#39;  </p>
+<ul>
+<li>匹配所有</li>
+</ul>
+</blockquote>
+<h4 id="3-type-">3. -type类型查找与反向！</h4>
+<p>f   普通文件
+d     目录
+l     符号链接文件</p>
+<blockquote>
+<p>find . -type d 查找的为目录文件
+find . ! -type d //查找的不是目录文件</p>
+</blockquote>
+<h4 id="4-size-10000c-10000-">4. -size 查找某个范围内的文件 +10000c(大于10000字节的文件 )</h4>
+<ol start="5">
+<li>忽略目录</li>
+</ol>
+<h4 id="5-1-">5.1 单个目录</h4>
+<blockquote>
+<p>find /data -path &quot;/data/dir3&quot; -prune -o -print</p>
+</blockquote>
+<p>-path 指定目录样式
+-prune 排除
+-o （or） 
+print 输出</p>
+<h4 id="5-2-">5.2 多个目录忽略</h4>
+<blockquote>
+<p>find /data -path <strong>( -path /data/dir2 -o -path /data/dir3 )</strong> -prune -o -print
+()表达式结合
+\（）转义（）在命令行有特殊含义
+find . ( -path ./dir1 -o -path ./dir2 ) -prune -o -print
+11.11</p>
+<ol start="6">
+<li>-regextype &quot;type&quot; -regex &quot;pattern&quot;
+find / -regex &quot;.*find&quot;
+默认类型 <strong>emacs</strong></li>
+</ol>
+</blockquote>
+<h4 id="7-exec-ls-l-">7. exec加入ls -l 命令</h4>
+<blockquote>
+<p>find . -type f -exec ls -l {} \;
+\; 是为了转义
+{}代表前面查找到的内容</p>
+</blockquote>
+<p><strong>-ok</strong> 相同</p>
+<h4 id="8-ls-l-xargs">8. ls -l 在xargs</h4>
+<ul>
+<li>|管道符号<blockquote>
+<p>find . -type f|xargs ls -l</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="-"><strong>技巧</strong></h4>
+<p>1、 进入目录删除文件</p>
+<blockquote>
+<p>find /root/data -type f -name &quot;*oldboy.txt&quot; | xargs rm -f 
+2、 sed命令替换
+3、 普通文件压缩文件</p>
+</blockquote>
+<p>4、删除文件下所有文件保留想要的
+touch file{1..10} 生成10个文件</p>
+<ul>
+<li>xargs<blockquote>
+<p>find /xx -type f ! -name &quot;file10&quot; | xargs rm -f </p>
+</blockquote>
+</li>
+<li>exec<blockquote>
+<p>find /xx -type f ! -name &quot;file10&quot; -exec rm  -f { } \;</p>
+</blockquote>
+</li>
+<li>rsync </li>
+</ul>
+<p>11.12</p>
+<h3 id="xargs-"><strong>xargs传递命令的过滤器</strong></h3>
+<ol>
+<li><p>-n 每行的最大参数</p>
+<blockquote>
+<p>xargs -n 3 &lt; test.txt 空格为分隔符</p>
+</blockquote>
+</li>
+<li><p>-d x 自定义分隔符</p>
+<blockquote>
+<p>echo abxabxabx|xargs -d x </p>
+</blockquote>
+</li>
+<li>-i {} 代替的字符串 -I 代替[]<blockquote>
+<p>find . -name &quot;text&quot;|xargs -i  mv {} </p>
+</blockquote>
+<h3 id="chown-"><strong>chown文件或目录的用户和用户组</strong></h3>
+*创建用户
+useradd name</li>
+<li>加密码
+useradd passwd name
+chown 用户 文件
+chown :组 文件
+chown 用户:组 文件
+-R 递归更改</li>
+<li>chown root file</li>
+</ol>
+<h3 id="chmod"><strong>chmod</strong></h3>
+<p>超级命令
+ chmod u+r 文件
+ 1、使用字母+操作符
+ chmod u+r 1.txt</p>
+<p> 2、数字权利
+ r 4
+ x 1
+ w 2
+ 7--rwx
+ 5--rx
+ 3--wx
+ 3、读写权利的说明
+ 644
+ 755</p>
+<h2 id="-">熟悉</h2>
+<h4 id="rename-"><strong>rename</strong>批量修改文件名</h4>
+<p>rename from to file
+from 原来</p>
+<p>to  改后</p>
+<p>file *</p>
+<h4 id="dirname-"><strong>dirname</strong> 显示文件目录</h4>
+<blockquote>
+<p>dirname /data/dir1/1.txt</p>
+</blockquote>
+<h4 id="chattr-"><strong>chattr</strong> 改变扩展属性</h4>
+<ol>
+<li><p>+a 文件中添加数据不能删除</p>
+<blockquote>
+<p>chattr +a test
+追加文本
+echo 111 &gt;&gt;test</p>
+</blockquote>
+</li>
+<li><p>+i上锁  -i 去掉</p>
+</li>
+</ol>
+<p>11.13</p>
+<h4 id="file-"><strong>file :显示文件类型</strong></h4>
+<ul>
+<li>通配符匹配多个文件<blockquote>
+<p>fle -b file #《==精简模式</p>
+</blockquote>
+<h4 id="md5sum-"><strong>MD5sum 校验</strong></h4>
+-b 二进制读取
+-c 读取并校验</li>
+<li>检验文件是否改变
+生成校验文件<blockquote>
+<p>md5sum oldboy.txt &gt;md5.log 
+cat md5.log
+md5 -c md5.log
+<strong>总结</strong></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="chgrp-"><strong>chgrp更改文件用户组</strong></h4>
+<p>chgrp  组 文件
+chgrp root file</p>
+<h4 id="umask-"><strong>umask创建默认权限</strong></h4>
+<p>默认值 0 3 3
+不懂
+11.15</p>
+<h1 id="-">文件过滤和内容编辑</h1>
+<h2 id="cat-"><strong>cat 合并文件或查看文件</strong></h2>
+<p>1、功能
+1.1 查看文本</p>
+<blockquote>
+<p>cat text
+1.2 合并文件 
+cat file1.txt file2.txt &gt;newfile.txt</p>
+</blockquote>
+<p>1.3 创建编辑新文件
+cat &gt;file1.txt
+ctrl +d/c结束编辑
+ctrl+推个去掉</p>
+<p>1.4 <strong>非交互式的编辑/内容追加到尾部</strong>
+非交互式编辑 不需要移动光标</p>
+<blockquote>
+<p>cat &gt;&gt;file.txt&lt;<EOF
+cat >test.txt&gt;&gt;EOF
+1.5 清空文件
+cat /dev/null &gt;flie1.txt
+2、参数
+-n 从1开始对所有输入的内容an行编号 
+-b 同上但会忽略空白行号
+<strong>tac反向显示内容</strong>
+tac file</p>
+</blockquote>
+<h2 id="-">分页显示</h2>
+<h3 id="1-more-">1、more:</h3>
+<p>+nu 从行号开始显示
+交互式模式下
+    空格    下一页
+    B        上一页
+    /内容     查找 </p>
+<blockquote>
+<p>more -5 file 限制显示行数
+more +100 file
+分页显示目录
+ls dir|more -10</p>
+</blockquote>
+<h3 id="2-less-more-">2、<strong>less: more的升级版</strong></h3>
+<p>-N 显示行号
+交互式：
+    空格    下一页
+    B        上一页
+    /内容     向下查找 
+    ？        向上查找
+    v        进入编辑状态
+    g(G)    移动到第一行或者最后一行
+    q        退出less 命令
+    .
+11.17 </p>
+<h2 id="-">显示开头和结尾</h2>
+<h3 id="head"><strong>head</strong></h3>
+<p>-n 显示行数
+可以显示多个</p>
+<h3 id="tail"><strong>tail</strong></h3>
+<p> -N +5 是从第五开始显示</p>
+<h4 id="tailf-"><strong>tailf</strong> 日志追踪</h4>
+<p>tailf -n file </p>
+<h2 id="cut-"><strong>cut</strong>提取文字并输出</h2>
+<p>-d 自定义分隔符 默认是TAB
+-c 以字符为单位进行分割
+-N 第N个字节
+N- 从第n个到最后
+N-M 从第N到第M 个字节或字符
+-M 从第一行到M
+11.19</p>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
