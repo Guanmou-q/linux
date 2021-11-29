@@ -530,6 +530,63 @@ sort -c file<br>-t <strong>指定分隔符</strong><br>-u 去除重复的
 </ul>
 <h3 id="od-">od （不同进制显示）</h3>
 <h3 id="tee-">tee (多重定向）</h3>
+<h1 id="grep">grep</h1>
+<p>文本过滤工具  </p>
+<blockquote>
+<p>grep  参数   匹配模式 文件</p>
+</blockquote>
+<p>匹配模式：<strong>可以使正则表达式，也可以是普通字符</strong>
+<strong>配合正则表达式</strong></p>
+<h2 id="-">参数</h2>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>-v</strong></td>
+<td>排除某行</td>
+</tr>
+<tr>
+<td>n</td>
+<td>显示过滤后的内容</td>
+</tr>
+<tr>
+<td>i</td>
+<td>单个字符，不区分大小写**</td>
+</tr>
+<tr>
+<td>c</td>
+<td>统计匹配的行数</td>
+</tr>
+<tr>
+<td>o</td>
+<td>只输出匹配内容</td>
+</tr>
+<tr>
+<td>E</td>
+<td>扩展的grep</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-">应用</h2>
+<p><strong>简单应用</strong>  </p>
+<p><img src="https://img-blog.csdnimg.cn/81268556fd78420385409075af73eea3.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bem5bK444Gu54Of44Gl6YCd77yB,size_12,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h3 id="-">使用正则应用</h3>
+<p>去掉空行和注释的内容</p>
+<ul>
+<li>“|”表示或  </li>
+<li>^$ 表示空行<br>实例代码  <blockquote>
+<p>grep -Ev &quot;^$|#” a  </p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/6b0cff8172994e54a52ea370ce9a0bff.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bem5bK444Gu54Of44Gl6YCd77yB,size_18,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<h1 id="sed">sed</h1>
+<h1 id="awk">awk</h1>
 
           	</article>
         </div>
